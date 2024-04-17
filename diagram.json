@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-arduino-uno", "id": "uno", "top": 0, "left": 0, "attrs": {} },
+    {
+      "type": "board-ssd1306",
+      "id": "oled1",
+      "top": 339.14,
+      "left": 221.03,
+      "attrs": { "i2cAddress": "0x3c" }
+    },
+    { "type": "board-ds18b20", "id": "temp1", "top": -308.33, "left": 157.68, "attrs": {} },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -278.2, "left": 211.2, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": -176.2,
+      "left": -9.6,
+      "attrs": { "color": "green" }
+    },
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 257.9, "left": -19.4, "attrs": {} }
+  ],
+  "connections": [
+    [ "oled1:SCL", "uno:A5", "green", [ "v0" ] ],
+    [ "oled1:SDA", "uno:A4", "green", [ "v-76.8", "h-38.33", "v-77.3" ] ],
+    [ "temp1:DQ", "uno:8", "green", [ "v67.2", "h86.4", "v105" ] ],
+    [ "relay1:IN", "uno:7", "green", [ "h0" ] ],
+    [ "uno:GND.1", "btn1:2.l", "black", [ "h-163.5", "v-153.2" ] ],
+    [ "btn1:2.r", "uno:13", "green", [ "h0" ] ],
+    [ "pot1:GND", "uno:GND.2", "black", [ "v0" ] ],
+    [ "pot1:VCC", "uno:5V", "red", [ "v0" ] ],
+    [ "pot1:SIG", "uno:A2", "green", [ "v19.2", "h153.2", "v-67.2", "h54.2" ] ]
+  ],
+  "dependencies": {}
+}
