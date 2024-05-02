@@ -43,6 +43,7 @@ class cPID
 public:
 
     cPID() : cPID(1.0, 0.0,0.0,1.0,0.0,0.0,10.0,0.1) {};
+    cPID(float setTs) : cPID(setTs, 0.0,0.0,1.0,0.0,0.0,10.0,0.1) {};
     cPID(float setTs, float setKp, float setTi, float setTd) : cPID(setTs, 0.0, 0.0, setKp, setTi, setTd, 10.0, 0.1) {};
     cPID(float setTs, float setOutMin, float setOutMax) : cPID(setTs, setOutMin, setOutMax, 1.0, 0.0, 0.0, 10.0, 0.1) {};
     cPID(float setTs, float setOutMin, float setOutMax, float setKp, float setTi, float setTd) : cPID(setTs, setOutMin, setOutMax, setKp, setTi, setTd, 10.0, 0.1) {};

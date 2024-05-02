@@ -4,14 +4,16 @@
 void cTermometer::init()
 {
     _sensor.begin();
+    _sensor.setWaitForConversion(false);
 }
 
 //funkcja odczytujaca aktualną temperature
 float cTermometer::readTemperature()
 {
+    
     _sensor.requestTemperatures();
     //jakikolwiek czujnik jes podlaczony
-    float temp = _sensor.getTempCByIndex(0); 
+    float temp = _sensor.getTempCByIndex(0);     
 
     return temp;
 }
