@@ -1,7 +1,5 @@
 #include "taskPanel.h"
 
-
-
 void cPanelThread::setup()
 {
    _display.init(); 
@@ -10,22 +8,16 @@ void cPanelThread::setup()
    _btnRight.setup();
 
     _display.printTest(21);
-   _btnLeft.attachFunction(&cPanelThread::test);
-   _btnRight.attachFunction(&cPanelThread::test2);
+    setupState();
 }
 
 void cPanelThread::mainLoop()
 {
+    loopState();
     _btnLeft.update();
-   _btnMid.update();
-   _btnRight.update();
-    // float pot = _potentiometer.readNorm();
-    
-    // float last = _data.temp;
-    // _data.temp = pot*10.0f + 15.0f; 
+    _btnMid.update();
+    _btnRight.update();
 
-    // if(last!= _data.temp)
-    //     _display.printAllData(_data.temp, 21.0f, 0.2f);
 }
 
 void cPanelThread::test()
@@ -40,4 +32,46 @@ void cPanelThread::test2()
     _display.printTest(5);
 }
 
+void cPanelThread::setupState()
+{   
+    switch(_state)
+    {
+        case eShowData:
+            _btnLeft.attachFunction(&cPanelThread::goToStateTemp);
+            _btnMid.attachFunction(nullptr);
+            _btnRight.attachFunction(&cPanelThread::goToStateWindow);
+            break;
+        case eSetTemp:
+            _btnLeft.attachFunction(&cPanelThread::goToStateShow);
+            _btnMid.attachFunction(nullptr);
+            _btnRight.attachFunction(nullptr);
+            break;
+        case eSetWindow:
+            _btnLeft.attachFunction(&cPanelThread::goToStateShow);
+            _btnMid.attachFunction(nullptr);
+            _btnRight.attachFunction(nullptr);
+            break;
+    }
+}
 
+void cPanelThread::loopState()
+{
+    switch (_state)
+    {
+        case eShowData:
+            _display.printTest(999);
+            break;
+        case eSetTemp:
+            _display.printTest((int)(_potentiometer.readNorm()*100));
+            break;
+        case eSetWindow:
+            _display.printTest((int)(_potentiometer.readNorm()*500));
+            break;
+    }
+}
+
+void cPanelThread::goToState(eMachineState state)
+{
+    _state = state;
+    setupState();
+}

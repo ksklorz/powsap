@@ -16,8 +16,18 @@ struct sDisplayedData
     float pot = 0.0f;
 };
 
+enum eMachineState
+{
+    eShowData,
+    eSetTemp,
+    eSetWindow
+};
 class cPanelThread : public cThread 
 {
+    public:
+
+
+private:
     cDisplay _display;
     cPotentiometer _potentiometer;
     cPanelButton _btnLeft;
@@ -25,6 +35,7 @@ class cPanelThread : public cThread
     cPanelButton _btnRight;
 
     sDisplayedData _data;
+    eMachineState _state;
 
     int _counter;
     
@@ -34,9 +45,20 @@ class cPanelThread : public cThread
     void test(void);
     void test2(void);
 
+
+
+    void setupState();
+    void loopState();
+    void goToState(eMachineState state);
+
+    void goToStateShow() {goToState(eShowData);};
+    void goToStateTemp() {goToState(eSetTemp);};
+    void goToStateWindow() {goToState(eSetWindow);};
+
     public:
         cPanelThread(uint32_t dT) : cThread(dT), _potentiometer(potPIN), 
-        _btnLeft(btnLeftPIN, this), _btnMid(btnMidPIN, this), _btnRight(btnRightPIN, this), _counter(0) {};
+        _btnLeft(btnLeftPIN, this), _btnMid(btnMidPIN, this), _btnRight(btnRightPIN, this), 
+        _state(eShowData), _counter(0) {};
 
 };
 
