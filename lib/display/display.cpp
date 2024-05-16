@@ -28,7 +28,16 @@ void cDisplay::printAllData(float tempSet, float tempGet, float out)
     _display.println("C");
     _display.print(100.0f*out,0);
     _display.println("%  ");
-    
+    _display.display();
 
+}
+
+void cDisplay::printTest(int x)
+{
+    _display.clearDisplay();
+    _display.setTextSize(4);
+    _display.setTextColor(WHITE); 
+    _display.setCursor(0,0);
+    _display.print(x);
     _display.display();
 }

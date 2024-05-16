@@ -11,6 +11,8 @@ class cDisplay
     public:
     void init();
     void printAllData(float tempSet, float tempGet, float out);
+
+    void printTest(int x);
 };
 
 

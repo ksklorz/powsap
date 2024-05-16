@@ -4,7 +4,9 @@
 const uint8_t tempPIN = 8;
 const uint8_t relayPIN = 7;
 
-const uint8_t button1PIN = 13;
+const uint8_t btnLeftPIN = 13;
+const uint8_t btnMidPIN = 12;
+const uint8_t btnRightPIN = 11;
 const uint8_t potPIN = A2;
 
 
