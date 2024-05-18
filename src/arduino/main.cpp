@@ -1,6 +1,6 @@
 #include <Arduino.h>
 
-#include "config.h"
+#include "Config.h"
 
 
 #include "taskPanel.h"

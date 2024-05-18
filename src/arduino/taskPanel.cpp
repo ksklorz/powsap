@@ -1,5 +1,6 @@
 #include "taskPanel.h"
 
+
 void cPanelThread::setup()
 {
    _display.init(); 
@@ -44,7 +45,7 @@ void cPanelThread::setupState()
         case eSetTemp:
             _btnLeft.attachFunction(&cPanelThread::goToStateShow);
             _btnMid.attachFunction(nullptr);
-            _btnRight.attachFunction(nullptr);
+            _btnRight.attachFunction(&cPanelThread::setTemp);
             break;
         case eSetWindow:
             _btnLeft.attachFunction(&cPanelThread::goToStateShow);
@@ -56,13 +57,16 @@ void cPanelThread::setupState()
 
 void cPanelThread::loopState()
 {
+    float tempDisp;
     switch (_state)
     {
         case eShowData:
-            _display.printTest(999);
+            _display.printData(_dataIn, _dataOut);
             break;
         case eSetTemp:
-            _display.printTest((int)(_potentiometer.readNorm()*100));
+            tempDisp = _potentiometer.readScaled(setTempMin, setTempMax);
+            _tempData.temp = tempDisp;
+            _display.printSetData(tempDisp, 1, 'C');
             break;
         case eSetWindow:
             _display.printTest((int)(_potentiometer.readNorm()*500));
@@ -74,4 +78,10 @@ void cPanelThread::goToState(eMachineState state)
 {
     _state = state;
     setupState();
+}
+
+void cPanelThread::setTemp()
+{
+    _dataOut.temp = _tempData.temp;
+    goToStateShow();
 }

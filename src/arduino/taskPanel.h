@@ -4,17 +4,11 @@
 #include <Arduino.h>
 
 #include "config.h"
-#include "display.h"
+#include "PanelDisplay.h"
 #include "potentiometer.h"
 #include "PanelButton.h"
 
-
-
-struct sDisplayedData
-{
-    float temp = 0.0f;
-    float pot = 0.0f;
-};
+#include "struct.h"
 
 enum eMachineState
 {
@@ -24,18 +18,19 @@ enum eMachineState
 };
 class cPanelThread : public cThread 
 {
-    public:
-
 
 private:
-    cDisplay _display;
+    cPanelDisplay _display;
     cPotentiometer _potentiometer;
     cPanelButton _btnLeft;
     cPanelButton _btnMid;
     cPanelButton _btnRight;
 
-    sDisplayedData _data;
     eMachineState _state;
+
+    sDataCmd _dataIn;
+    sDataCmd _dataOut;
+    sDataCmd _tempData;
 
     int _counter;
     
@@ -54,6 +49,8 @@ private:
     void goToStateShow() {goToState(eShowData);};
     void goToStateTemp() {goToState(eSetTemp);};
     void goToStateWindow() {goToState(eSetWindow);};
+    void setTemp();
+    void setWindow();
 
     public:
         cPanelThread(uint32_t dT) : cThread(dT), _potentiometer(potPIN), 

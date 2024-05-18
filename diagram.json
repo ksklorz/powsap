@@ -16,22 +16,43 @@
     {
       "type": "wokwi-pushbutton",
       "id": "btn1",
-      "top": -176.2,
-      "left": -9.6,
+      "top": -230.3,
+      "left": -41.7,
+      "rotate": 270,
       "attrs": { "color": "green" }
     },
-    { "type": "wokwi-potentiometer", "id": "pot1", "top": 257.9, "left": -19.4, "attrs": {} }
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": -250.9, "left": -182.6, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": -230.3,
+      "left": 15.9,
+      "rotate": 270,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn3",
+      "top": -230.3,
+      "left": 73.5,
+      "rotate": 270,
+      "attrs": { "color": "green" }
+    }
   ],
   "connections": [
     [ "oled1:SCL", "uno:A5", "green", [ "v0" ] ],
     [ "oled1:SDA", "uno:A4", "green", [ "v-76.8", "h-38.33", "v-77.3" ] ],
     [ "temp1:DQ", "uno:8", "green", [ "v67.2", "h86.4", "v105" ] ],
     [ "relay1:IN", "uno:7", "green", [ "h0" ] ],
-    [ "uno:GND.1", "btn1:2.l", "black", [ "h-163.5", "v-153.2" ] ],
-    [ "btn1:2.r", "uno:13", "green", [ "h0" ] ],
     [ "pot1:GND", "uno:GND.2", "black", [ "v0" ] ],
     [ "pot1:VCC", "uno:5V", "red", [ "v0" ] ],
-    [ "pot1:SIG", "uno:A2", "green", [ "v19.2", "h153.2", "v-67.2", "h54.2" ] ]
+    [ "pot1:SIG", "uno:A2", "green", [ "v432", "h268.4", "v0", "h102.2" ] ],
+    [ "uno:GND.1", "btn1:1.l", "black", [ "v-28.2", "h-134.7", "v-97.2", "h28.8" ] ],
+    [ "uno:13", "btn1:2.l", "green", [ "v-37.8", "h-125.2" ] ],
+    [ "btn2:2.l", "uno:12", "green", [ "v134.4", "h77.1" ] ],
+    [ "btn3:2.l", "uno:11", "green", [ "v124.8", "h29" ] ],
+    [ "btn1:1.r", "btn2:1.r", "black", [ "v-19.4", "h57.6" ] ],
+    [ "btn2:1.r", "btn3:1.r", "black", [ "v-19.4", "h57.6" ] ]
   ],
   "dependencies": {}
 }

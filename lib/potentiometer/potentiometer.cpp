@@ -12,3 +12,10 @@ float cPotentiometer::readNorm()
     float x = ((float)value - (float)_minValue)/(float)(_maxValue-_minValue);
     return x;
 }
+
+float cPotentiometer::readScaled(float min, float max)
+{
+    float scaled = readNorm();
+    scaled = scaled * (max - min) + min;
+    return scaled;
+}

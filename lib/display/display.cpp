@@ -41,3 +41,17 @@ void cDisplay::printTest(int x)
     _display.print(x);
     _display.display();
 }
+
+void cDisplay::printSetData(float data, float d, char unit)
+{
+    // char str[20];
+
+    _display.clearDisplay();
+    _display.setTextSize(4);
+    _display.setTextColor(WHITE);
+    _display.setCursor(0,6);
+    _display.print(data,d);
+    // _display.print(" ");
+    _display.print(unit);
+    _display.display();
+}

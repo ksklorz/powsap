@@ -18,4 +18,5 @@ public:
 
     //metoda odczytująca wartość zrzutowaną na 0-1
     float readNorm();
+    float readScaled(float min, float max);
 };
