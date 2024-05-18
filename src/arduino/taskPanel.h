@@ -7,6 +7,7 @@
 #include "PanelDisplay.h"
 #include "potentiometer.h"
 #include "PanelButton.h"
+#include "serialArduino.h"
 
 #include "struct.h"
 
@@ -31,6 +32,8 @@ private:
     sDataCmd _dataIn;
     sDataCmd _dataOut;
     sDataCmd _tempData;
+
+    cSerialArd _serial;
 
     int _counter;
     

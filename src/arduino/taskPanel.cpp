@@ -83,5 +83,10 @@ void cPanelThread::goToState(eMachineState state)
 void cPanelThread::setTemp()
 {
     _dataOut.temp = _tempData.temp;
+    sPacket packet;
+    packet.data = _tempData.temp;
+    packet.time = millis();
+    _serial.sendPacket(packet);
+    
     goToStateShow();
 }
