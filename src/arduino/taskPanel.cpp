@@ -86,7 +86,7 @@ void cPanelThread::setTemp()
     sPacket packet;
     packet.data = _tempData.temp;
     packet.time = millis();
-    _serial.sendPacket(packet);
+    // _serial.sendPacket(packet);
     
     goToStateShow();
 }

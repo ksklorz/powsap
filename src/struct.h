@@ -1,19 +1,19 @@
 #pragma once
 
-enum eDevice
+enum eDevice : uint8_t
 {
     eDeviceTemp,
     eDeviceWindow,
     eDeviceLight
 };
 
-enum eDirection
+enum eDirection : uint8_t
 {
     eDirCmd,
     eDirSensor
 };
 
-enum eDeviceStatus
+enum eDeviceStatus : uint8_t
 {
     eStatusOK,
     eStatusError
@@ -27,8 +27,10 @@ struct sDataCmd
     float light;
 };
 
+#pragma pack(1)
 struct sPacket
 {
+    uint8_t startMarker[2];
     eDevice device;
     eDeviceStatus status;
     float data;

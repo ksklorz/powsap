@@ -33,7 +33,7 @@ private:
     sDataCmd _dataOut;
     sDataCmd _tempData;
 
-    cSerialArd _serial;
+    // cSerialArd _serial;
 
     int _counter;
     

@@ -31,13 +31,16 @@ bool cSerialArd::checkCRC(sPacket &packet)
 uint8_t cSerialArd::sendPacket(sPacket packet)
 {
     // Convert the packet structure to a byte array
+    packet.startMarker[0] = 0xAA;
+    packet.startMarker[1] = 0x55;
+    
     setCRC(packet);
     uint8_t* packetData = reinterpret_cast<uint8_t*>(&packet);
     size_t packetSize = sizeof(packet);
 
     // Send the packet byte by byte
     for (size_t i = 0; i < packetSize; i++) {
-        Serial.write(packetData[i]);
+        _serial.write(packetData[i]);
     }
 
     // Return the number of bytes sent
@@ -47,7 +50,7 @@ uint8_t cSerialArd::sendPacket(sPacket packet)
 bool cSerialArd::receivePacket(sPacket &packet)
 {
     // Check if there is data available to read from the serial port
-    if (Serial.available() >= sizeof(sPacket))
+    if (_serial.available() >= sizeof(sPacket))
     {
         Serial.readBytes((uint8_t*)&packet, sizeof(packet));
         if(checkCRC(packet))
