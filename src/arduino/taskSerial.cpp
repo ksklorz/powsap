@@ -12,10 +12,11 @@ void cSerialThread::mainLoop()
 {
     sPacket packet;
     packet.device = eDeviceTemp;
+    packet.sensor = eSensorTemp;
     packet.data = 2.1f;
     packet.time = millis();
-    packet.cnt = 0;
+    packet.cnt = 15;
     packet.status = eStatusOK;
 
-    _serial.sendPacket(packet);
+    _serial.sendPacket((uint8_t*)&packet, sizeof(packet));
 }

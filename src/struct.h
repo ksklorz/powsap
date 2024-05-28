@@ -19,6 +19,13 @@ enum eDeviceStatus : uint8_t
     eStatusError
 };
 
+enum eSensor : uint8_t
+{
+    eSensorTemp,
+    eSensorWindow,
+    eSensorLight
+};
+
 
 struct sDataCmd
 {
@@ -30,9 +37,9 @@ struct sDataCmd
 #pragma pack(1)
 struct sPacket
 {
-    uint8_t startMarker[2];
     eDevice device;
     eDeviceStatus status;
+    eSensor sensor;
     float data;
     uint32_t time;
     uint8_t cnt;

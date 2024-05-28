@@ -4,19 +4,18 @@
 #include <Arduino.h>
 
 #include "struct.h"
-#include "serialArduino.h"
+#include "mySerial.h"
+#include <SoftwareSerial.h>
 
 class cSerialThread : public cThread 
 {
-
-
-    cSerialArd _serial;
+    universalSerial<SoftwareSerial> _serial;
 
 public: 
     void setup();
     void mainLoop();
         cSerialThread(uint32_t dT) : cThread(dT)
-        ,_serial(5u,6u) {};
+        ,_serial(5u, 6u) {};
 
 };
 
