@@ -2,9 +2,10 @@
 
 enum eDevice : uint8_t
 {
-    eDeviceTemp,
-    eDeviceWindow,
-    eDeviceLight
+    eDeviceMaster = 0u,
+    eDeviceLight = 1u,
+    eDeviceWindow = 2u,
+    eDeviceTemp = 3u
 };
 
 enum eDirection : uint8_t
@@ -21,9 +22,9 @@ enum eDeviceStatus : uint8_t
 
 enum eSensor : uint8_t
 {
-    eSensorTemp,
-    eSensorWindow,
-    eSensorLight
+    eSensorLight = 0u,
+    eSensorWindow = 1u,
+    eSensorTemp = 2u
 };
 
 

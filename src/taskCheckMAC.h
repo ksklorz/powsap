@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include <WiFi.h>
 
+#ifdef ARDUINO_ARCH_ESP32
+
+
 void checkMacAddressTask(void *parameter) {
     while (1) {
         uint8_t mac[6];
@@ -18,3 +21,7 @@ void checkMacAddressTask(void *parameter) {
         vTaskDelay(pdMS_TO_TICKS(5000)); // Czekaj 5 sekund
     }
 }
+
+
+
+#endif

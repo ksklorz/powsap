@@ -7,7 +7,6 @@
 #include "PanelDisplay.h"
 #include "potentiometer.h"
 #include "PanelButton.h"
-#include "serialArduino.h"
 
 #include "struct.h"
 
