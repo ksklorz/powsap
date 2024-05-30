@@ -36,7 +36,7 @@ struct sMACaddress
 };
 
 std::map<eDevice, sMACaddress> MACmap{
-    {eDeviceMaster, MAC_ESP_1}
+    {eDeviceMaster, MAC_ESP_1},
     {eDeviceLight,  MAC_ESP_2}
 
 

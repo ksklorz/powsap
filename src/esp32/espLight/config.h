@@ -1,4 +1,5 @@
 #pragma once
 #include <arduino.h>
 
-const uint8_t lightPIN = LED_BUILTIN
+// const short PIN_LIGHT = LED_BUILTIN;
+const short PIN_LIGHT = 2;
