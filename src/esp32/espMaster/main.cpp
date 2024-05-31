@@ -27,9 +27,6 @@ void setup()
     outSerialDataQueue = inDataQueue;
     inSerialDataQueue = outDataQueue;
 
-    testQueue = xQueueCreate(QUEUE_SIZE, sizeof(sPacket));
-    outDataQueue = testQueue;
-
 
   xTaskCreate(
     serialReadThread,
@@ -45,17 +42,17 @@ void setup()
     "espNowThread",
     4096,
     NULL,
-    1,
+    10,
     NULL
   );
 
-  xTaskCreate(
-    testThread,
-    "testThread",
-    4096,
-    NULL,
-    1,
-    NULL);
+  // xTaskCreate(
+  //   testThread,
+  //   "testThread",
+  //   4096,
+  //   NULL,
+  //   1,
+  //   NULL);
 
   // xTaskCreate(
   //   checkMacAddressTask,

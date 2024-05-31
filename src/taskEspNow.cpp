@@ -1,3 +1,5 @@
+#ifdef ARDUINO_ARCH_ESP32
+
 #include "taskEspNow.h"
 
 #include "Wifi.h"
@@ -38,24 +40,19 @@ void espNowThread(void *pvParameters)
         sPacket packet;
         
 
-        if(xQueueReceive(outDataQueue, &packet, 0))
+        if(xQueueReceive(outDataQueue, &packet, portMAX_DELAY))
         {
             sMACaddress mac;
             memcpy(mac.mac, getMac(packet.device),6);
             esp_err_t result = esp_now_send(mac.mac, (uint8_t*)&packet, sizeof(sPacket));
-            Serial.println("Sent packet");
+            
             Serial.println(packet.data);
             // Serial.println(packet.device);
             Serial.println(result, HEX);
-
-            for (size_t i = 0; i < 6; i++)
-            {
-                Serial.print(mac.mac[i], HEX);
-                Serial.print(" ");
-            }
+            Serial.println();
             
         }
-        vTaskDelay(10/portTICK_PERIOD_MS);
+        // vTaskDelay(10/portTICK_PERIOD_MS);
     }
 }
 
@@ -79,3 +76,5 @@ uint8_t *getMac(eDevice device)
     }
     return nullptr;
 }
+
+#endif

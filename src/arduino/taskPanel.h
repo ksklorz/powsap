@@ -13,8 +13,9 @@
 enum eMachineState
 {
     eShowData,
-    eSetTemp,
-    eSetWindow
+    eSetLight,
+    eSetWindow,
+    eSetTemp
 };
 class cPanelThread : public cThread 
 {
@@ -49,8 +50,11 @@ private:
     void goToState(eMachineState state);
 
     void goToStateShow() {goToState(eShowData);};
+    void goToStateLight() {goToState(eSetLight);}
     void goToStateTemp() {goToState(eSetTemp);};
-    void goToStateWindow() {goToState(eSetWindow);};
+    void goToStateWindow() {goToState(eSetWindow);}
+    void setLightContinous();
+    void setLight();
     void setTemp();
     void setWindow();
 
