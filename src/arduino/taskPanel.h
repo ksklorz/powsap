@@ -56,6 +56,8 @@ private:
     void setLightContinous();
     void setLight();
     void setTemp();
+
+    void setWindowContinous();
     void setWindow();
 
     public:

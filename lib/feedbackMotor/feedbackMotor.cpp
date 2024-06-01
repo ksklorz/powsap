@@ -2,7 +2,7 @@
 
 void cFeedbackMotor::update()
 {
-    enc.update();
-    float pwm = controler.update(set_speed, enc.omega);
-    mot.setMotor(pwm);
+    cEncoder::update();
+    float pwm = controler.update(set_speed, omega);
+    setMotor(pwm);
 }

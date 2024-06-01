@@ -18,7 +18,8 @@ void serialReadThread(void *pvParameters)
     {
         if(serial.receivePacket((uint8_t*)&packet, sizeof(packet)))
         {
-            xQueueSend(inSerialDataQueue, &packet, 0);                    
+            xQueueSend(inSerialDataQueue, &packet, 0); 
+            // Serial.printf("Received packet: %d; %d; %.3f\n", packet.device, packet.sensor, packet.data);
         }
 
         vTaskDelay(1 / portTICK_PERIOD_MS);

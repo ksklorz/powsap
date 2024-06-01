@@ -3,21 +3,22 @@
 #include <encoder.h>
 #include <PID.h>
 
-class cFeedbackMotor
+class cFeedbackMotor : public cMotor, public cEncoder
 {
     cPID controler;
     float set_speed;
     
     public:
-        cMotor mot;
-        cEncoder enc;
+        // cMotor mot;
+        // cEncoder enc;
 
         cFeedbackMotor(float Ts, int pwm, int motA, int motB, int encA, int encB) :
-            controler(Ts, -1.0, 1.0, 0.04, .1, 0.0), set_speed(0.0), mot(pwm, motA, motB), enc(encA, encB) 
+            cMotor(pwm, motA, motB), cEncoder(encA, encB),
+            controler(Ts, -1.0, 1.0, 0.04, .1, 0.0), set_speed(0.0)
         {};
 
         void update();
         void setSpeed(float set) {set_speed = set;};
-        float getSpeed() {return enc.omega;};
+        float getSpeed() {return omega;};
     
 };

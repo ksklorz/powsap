@@ -19,6 +19,7 @@ class cEncoder
 
         void inter();
         void update();
+        void reset();
 
         float getPos();
 };

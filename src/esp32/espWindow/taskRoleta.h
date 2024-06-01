@@ -2,8 +2,6 @@
 #define gowno
 #pragma once
 #include <Arduino.h>
-#include "encoder.h"
-#include "config.h"
 
 
 extern QueueHandle_t setLightQueue;

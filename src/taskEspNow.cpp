@@ -25,14 +25,19 @@ void espNowThread(void *pvParameters)
     esp_now_register_recv_cb(espNowReceiver);
 
     esp_now_peer_info_t peerInfo;
-    memcpy(peerInfo.peer_addr, getMac(eDevice::eDeviceLight), 6);
+    // memcpy(peerInfo.peer_addr, getMac(eDevice::eDeviceLight), 6);
 
     peerInfo.channel = 0;
     peerInfo.encrypt = false;
-    while (esp_now_add_peer(&peerInfo) != ESP_OK)
-    {
-        Serial.println("Error adding peer");
-        vTaskDelay(1000/portTICK_PERIOD_MS);
+    
+    for(auto &it : MACmap)
+    {   
+        memcpy(peerInfo.peer_addr, it.second.mac, 6);
+        while (esp_now_add_peer(&peerInfo) != ESP_OK)
+        {
+            Serial.println("Error adding peer");
+            vTaskDelay(1000/portTICK_PERIOD_MS);
+        }
     }
 
     while(true)
@@ -46,6 +51,12 @@ void espNowThread(void *pvParameters)
             memcpy(mac.mac, getMac(packet.device),6);
             esp_err_t result = esp_now_send(mac.mac, (uint8_t*)&packet, sizeof(sPacket));
             
+            for(int i = 0; i < 6; i++)
+            {
+                Serial.print(mac.mac[i], HEX);
+                Serial.print(" ");
+            }
+
             Serial.println(packet.data);
             // Serial.println(packet.device);
             Serial.println(result, HEX);

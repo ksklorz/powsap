@@ -17,7 +17,7 @@ void cEncoder::update()
 
     if(diffTime == 0.0)
         return;
-        
+
   lastTime = time;
   lastPos = pos;
 
@@ -30,6 +30,14 @@ void cEncoder::update()
   static const float tau = 0.01; //stala czasowa
   float a = tau/(tau + diffTime);
   omega = a * omega + (1.0-a) * omegaNF; 
+}
+
+void cEncoder::reset()
+{
+    pos = 0;
+    omega = 0.0f;
+    lastPos = 0;
+    lastTime = millis();
 }
 
 float cEncoder::getPos()

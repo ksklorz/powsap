@@ -30,7 +30,7 @@ void setup()
     "lightBulbThread",
     4096,
     NULL,
-    5,
+    4,
     NULL
   );
 
@@ -39,18 +39,18 @@ void setup()
     "espNowThread",
     4096,
     NULL,
-    4,
+    5,
     NULL
   );
 
-  xTaskCreate(
-    testThread,
-    "testThread",
-    4096,
-    NULL,
-    1,
-    NULL
-  );
+  // xTaskCreate(
+  //   testThread,
+  //   "testThread",
+  //   4096,
+  //   NULL,
+  //   1,
+  //   NULL
+  // );
  
 
   vTaskDelete(NULL);
