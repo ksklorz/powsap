@@ -9,26 +9,55 @@ extern QueueHandle_t testQueue;
 void testThread(void *pvParameters)
 {
     float level = 1.0f;
-    float step = -0.01f;
+    float step = 0.01f;
+    int state = 0;
     while (true)
     {
+
+        
         sPacket packet;
-        packet.device = eDevice::eDeviceLight;
-        packet.sensor = eSensor::eSensorLight;
+        packet.device = eDevice::eDeviceWindow;
+        packet.sensor = eSensor::eSensorWindow;
         packet.data = level;
         xQueueSend(testQueue, &packet, portMAX_DELAY);
 
-        vTaskDelay(100 / portTICK_PERIOD_MS);
-        level += step;
-        0.01f;
-        if (level <= 0.0f)
+        switch (state)
         {
-            step = 0.01f;
+            case 0:
+                level = 0;
+                state = 1;
+                break;
+            case 1:
+                level = .5f;
+                state = 2;
+                break;
+            case 2:
+                level = 1.0f;
+                state = 3;
+                break;
+            case 3:
+                level = .5f;
+                state = 4;
+                break;
+            case 4:
+                level = 0;
+                state = 0;
+                break;
         }
-        if (level >= 1.0f)
-        {
-            step = -0.01f;
-        }
+        
+        vTaskDelay(3000 / portTICK_PERIOD_MS);
+
+        // vTaskDelay(30 / portTICK_PERIOD_MS);
+        // level += step;
+        // 0.01f;
+        // if (level <= -1.0f)
+        // {
+        //     step = 0.01f;
+        // }
+        // if (level >= 1.0f)
+        // {
+        //     step = -0.01f;
+        // }
     }
 }
 
