@@ -1,9 +1,8 @@
 #pragma once
 #include <Arduino.h>
 
-class cTools
+namespace Tools
 {
-public:
-    static void setCRC(uint8_t* data, size_t size);
-    static bool checkCRC(uint8_t* data, size_t size);
-};
+    void setCRC(uint8_t* data, size_t size);
+    bool checkCRC(uint8_t* data, size_t size);
+}

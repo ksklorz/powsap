@@ -1,6 +1,6 @@
 #include "tools.h"
 
-void cTools::setCRC(uint8_t *data, size_t size)
+void Tools::setCRC(uint8_t *data, size_t size)
 {
     uint8_t crc = 0;
     for (size_t i = 0; i < size - 1; i++)
@@ -10,7 +10,7 @@ void cTools::setCRC(uint8_t *data, size_t size)
     data[size - 1] = crc;
 }
 
-bool cTools::checkCRC(uint8_t *data, size_t size)
+bool Tools::checkCRC(uint8_t *data, size_t size)
 {
     uint8_t crc = 0;
     for (size_t i = 0; i < size - 1; i++)

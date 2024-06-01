@@ -4,7 +4,7 @@
 template <class T>
 inline uint8_t universalSerial<T>::sendPacket(uint8_t* packet, size_t size)
 {
-    cTools::setCRC(packet, size);
+    Tools::setCRC(packet, size);
 
     _serial.write(0xAA);
     _serial.write(0x55);
@@ -36,5 +36,5 @@ inline bool universalSerial<T>::receivePacket(uint8_t* packet, size_t size)
     }
 
     _serial.readBytes(((uint8_t*)packet), size);
-    return cTools::checkCRC(packet, size);
+    return Tools::checkCRC(packet, size);
 }
