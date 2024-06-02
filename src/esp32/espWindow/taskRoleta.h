@@ -1,5 +1,3 @@
-#ifndef gowno
-#define gowno
 #pragma once
 #include <Arduino.h>
 
@@ -10,5 +8,3 @@ void roletaThread(void *pvParameters);
 
 
 static void inter();
-
-#endif
