@@ -14,7 +14,7 @@ public:
     void setup();
     void mainLoop();
         cSerialThread(uint32_t dT) : cThread(dT)
-        ,_serial(5u, 6u) {};
+        ,_serial(2u, 3u) {};
     
     void sendSerial(sPacket packet); 
 

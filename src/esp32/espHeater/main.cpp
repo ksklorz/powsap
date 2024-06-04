@@ -4,6 +4,7 @@
 #include "taskTermometer.h"
 #include "taskControler.h"
 #include "taskPWM.h"
+#include "taskTelemetry.h"
 
 #include "taskTest.h"
 QueueHandle_t testQueue;
@@ -13,6 +14,7 @@ QueueHandle_t outDataQueue;
 
 QueueHandle_t setPWMQueue;
 QueueHandle_t getTempQueue;
+QueueHandle_t tlmQueue;
 
 
 void setup()
@@ -26,6 +28,7 @@ void setup()
   getTempQueue = xQueueCreate(1, sizeof(float));
   
   testQueue = inDataQueue;
+  tlmQueue = outDataQueue;
 
   xTaskCreate(
     taskPWM,
@@ -49,6 +52,14 @@ void setup()
     4096,
     NULL,
     3,
+    NULL
+  );
+  xTaskCreate(
+    taskTelemetry,
+    "taskTelemetry",
+    4096,
+    NULL,
+    2,
     NULL
   );
 

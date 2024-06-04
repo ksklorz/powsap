@@ -14,7 +14,7 @@ void taskControler(void *pvParameters)
     TickType_t xLastWakeTime;
     xLastWakeTime = xTaskGetTickCount();
 
-    cPID controler((float)PERIOD_CONTROLER / 1000.0f, 0.0f, 1.0f, 0.001f, 10.0f, 0.0f);
+    cPID controler((float)PERIOD_CONTROLER / 1000.0f, 0.0f, 1.0f, 0.01f, 10.0f, 0.0f, 10.0f, 2.0f);
 
     while(true)
     {

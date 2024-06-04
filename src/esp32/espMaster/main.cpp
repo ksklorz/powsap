@@ -2,12 +2,10 @@
 
 #include "taskSerialRead.h"
 #include "taskEspNow.h"
-#include "taskCheckMAC.h"
 
-#include "taskTest.h"
 
-// #include "struct.h"
-// #include <HardwareSerial.h>
+#include "taskSerialSend.h"
+#include "mySerial.h"
 
 QueueHandle_t inDataQueue;
 QueueHandle_t outDataQueue;
@@ -16,24 +14,27 @@ QueueHandle_t inSerialDataQueue;
 
 QueueHandle_t testQueue;
 
-// HardwareSerial MySerial(0);
+universalSerial<HardwareSerial> serial(Serial0);
+
 void setup()
 {
   Serial.begin(115200);
-  delay(2000);
+  // delay(2000);
 
     inDataQueue = xQueueCreate(QUEUE_SIZE, sizeof(sPacket));
     outDataQueue = xQueueCreate(QUEUE_SIZE, sizeof(sPacket));
     outSerialDataQueue = inDataQueue;
     inSerialDataQueue = outDataQueue;
 
+    
+    serial.begin();
 
   xTaskCreate(
     serialReadThread,
     "serialReadThread",
     4096,
     NULL,
-    1,
+    3,
     NULL
   );
 
@@ -43,6 +44,15 @@ void setup()
     4096,
     NULL,
     10,
+    NULL
+  );
+
+  xTaskCreate(
+    serialSendThread,
+    "serialSendThread",
+    4096,
+    NULL,
+    2,
     NULL
   );
 

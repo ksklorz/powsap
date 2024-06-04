@@ -5,12 +5,12 @@
 
 #include "mySerial.h"
 
+
+
 void serialReadThread(void *pvParameters)
 { 
     sPacket packet;
 
-    universalSerial<HardwareSerial> serial(Serial0);
-    serial.begin();
     vTaskDelay(1000 / portTICK_PERIOD_MS);
 
     Serial.println("Serial read thread started");
