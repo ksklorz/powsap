@@ -65,6 +65,8 @@ private:
         _btnLeft(btnLeftPIN, this), _btnMid(btnMidPIN, this), _btnRight(btnRightPIN, this), 
         _state(eShowData), _counter(0) {};
 
+        void newSensorData(sPacket packet);
+
 };
 
 

@@ -152,3 +152,21 @@ void cPanelThread::setWindow()
     setWindowContinous();
     goToStateShow();
 }
+
+void cPanelThread::newSensorData(sPacket packet)
+{
+    switch(packet.sensor)
+    {
+        case eSensorLight:
+            _dataIn.light = packet.data;
+            break;
+
+        case eSensorTemp:
+            _dataIn.temp = packet.data;
+            break;
+
+        case eSensorWindow:
+            _dataIn.window = packet.data;
+            break;
+    }
+}

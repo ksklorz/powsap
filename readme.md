@@ -72,6 +72,31 @@ Dane MAC płytek do rozsyłania bezprzewodowego. Tutaj jest definicja która pł
 Wątek FreeRTOS odpowiadający za komunikację po esp-now. posiada dwie kolejki - do jedne wrzuca otrzymane pakiety, z drugiej rozsyłą gdy tylko coś na niej się pojawi.
 
 ### arduino
+W folderze znajdują się dedykowane klasy tylko pod arduino. Klasa taskThread jest klasą czysto wirtualną. DAje narzędzia do periodycznego wywoływania określonego zadania. Jest to tylko pseudowątek, bo algorytmy muszą i tak ise wykonywać sekwencyjnie (arduino beznadziejnie radzi sobie z FreeRTOSem). W aktualnej werjsi z tej klasy dziedziczą wątki odpowiedzialne za komunikację i panel użytkownika. 
+
+Wątek od komunikacji periodycznie sprawdza czy nie pojawiły się nowe dane na porcie. Dodatkowo są tam narzędzia do wysyłania danych.
+
+Wątek panelu jest bardziej rozbudowany. Korzysta z klas PanelButton i PanelDisplay, które dziedziczą z wcześniej wspomnianeych klas, ale posiadają pewne dedykowane narzędzia wykorzystujące konkretne struktury w projekcie. 
+
+W klasie zaimplmentowana jest maszyna stanów. Wciśnięcie odpowiedniego przycisku może zmienić aktualny stan. Po wejściu do satnu wywoływana jest funkcja, która w szczególności ustawia nowe znaczenie przycisków. W każdym ze stanów cyklicznie wywoływana jest funkcja np. odświeżająca wyświetlacz.
+
+W aktualnym działaniu:
+Na ekranie wyświetlają się jakieś różne informacje zebrane z systemu. 3 przyciski przechodzą odpowiednio do ustawień temperatury, światła i rolety. Potencjometrem możena w tym momencie wybrać odpowiedni poziom. JEden z przycisków wraca, drugi zatwierdza i wysyła. PRzynajmniej takie jest założenie, aktualnie wysyłane są na bieżąco, żeby można był owszystko szybko płynnie zmieniąc, bo tak testowałem, ale jeszcze nie wiem jak się skończy. 
+
+### espMaster
+
+Płytka podpięta serialem do arduino. Dużej filozofii nie ma. Jeden wątek czyta serial, drugi wysyła na serial, trzeci obsługuje espNow (odbieranie i wysyłanie). Jak coś przyjdzie na serial to przechodzi przez kolejkę FreeRTOS, i watek espNow wysyła to do konkretnego slava. Jak cos przyjdzie na espNow od slava, to trafia do kolejki i po uarcie do arduino.
+
+### espLight
+Odbiera wartosć zadaną. Wysterowuje światło na odpowiedni poziom (funkcja nieliniowa bo ludzkei oko nieliniowo odbiera natężenie światła).
+
+### espHeater
+Kila wątków. Osobne do wysterowania przekaźnika, do odczytu temperatury, do regulatora, do komunikacji. W ząłożeniu odbiera po espNow zadaną temperaturę. Regulator cyklicznie liczy wysterowania PID i odpowiednio ustawia szerokość impulsu PWM przekaźnika.
+
+Nastawy losowe, jak będzie obiekt to się będę martwił.
+
+### espWindow
+Regulacja aktualnie w jednym wątku (w lib jest to rozbudowane). Przyjmuje wartosć zadaną i wysterowuje kaskadę regulatorów. Do dorobienia dopiero obsługa fotorezystora
 
 
 
