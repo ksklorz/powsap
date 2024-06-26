@@ -29,9 +29,6 @@ class cPID
 
     float _e1=0.0;     //roznica wejsc do wyliczenia czesci D
 
-
-
-
     float calcState(float, float);
     float calcP(float);
     float calcI(float);

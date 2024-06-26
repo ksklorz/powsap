@@ -19,6 +19,7 @@ universalSerial<HardwareSerial> serial(Serial0);
 void setup()
 {
   Serial.begin(115200);
+  Serial.setTimeout(5);
   // delay(2000);
 
     inDataQueue = xQueueCreate(QUEUE_SIZE, sizeof(sPacket));

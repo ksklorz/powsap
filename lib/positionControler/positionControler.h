@@ -24,8 +24,9 @@ public:
         set_position(0.0), mode(eModePosition)
     {};
 
-    void setPos(float set) {mode = eModePosition, set_position = set;};
-    void setSpeedMode(float set) {mode = eModeSpeed, setSpeed(set);};
+    void setAngle(float set) {mode = eModePosition; set_position = set;};
+    void setSpeed(float set) {mode = eModeSpeed; cFeedbackMotor::setSpeed(set);};
+    void resetAngle(float newAngle = 0.0f);
     
     void update();    
 };

@@ -40,7 +40,13 @@ void cEncoder::reset()
     lastTime = millis();
 }
 
-float cEncoder::getPos()
+void cEncoder::reset(int newPos)
+{
+    reset();
+    pos = newPos;
+}
+
+float cEncoder::getAngle()
 {
     return (float)pos /perRev * 2.0 * PI;
 }

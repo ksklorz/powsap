@@ -3,9 +3,11 @@
 
 class cEncoder
 {
+
     int lastPos;
     int lastTime;
 
+    protected:
     const float perRev = 960.0;
 
     public:
@@ -20,7 +22,8 @@ class cEncoder
         void inter();
         void update();
         void reset();
+        void reset(int newPos);
 
-        float getPos();
+        float getAngle();
 };
 
