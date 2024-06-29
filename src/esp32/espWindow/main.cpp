@@ -4,6 +4,7 @@
 #include "taskRoleta.h"
 #include "taskEspNow.h"
 #include "taskSensor.h"
+#include "taskTlm.h"
 
 #include "taskTest.h"
 QueueHandle_t testQueue;
@@ -13,8 +14,8 @@ QueueHandle_t setWindowQueue;
 QueueHandle_t inDataQueue;
 QueueHandle_t outDataQueue;
 QueueHandle_t lightSensorQueue;
-
-
+QueueHandle_t roletaSensorQueue;
+QueueHandle_t tlmQueue;
 
 void setup()
 {
@@ -28,6 +29,9 @@ void setup()
   testQueue = inDataQueue;
 
   lightSensorQueue = xQueueCreate(1, sizeof(float));
+  roletaSensorQueue = xQueueCreate(1, sizeof(float));
+
+  tlmQueue = outDataQueue;
 
   xTaskCreate(
     roletaThread,
@@ -53,6 +57,15 @@ void setup()
     4096,
     NULL,
     3,
+    NULL
+  );
+
+  xTaskCreate(
+    tlmThread,
+    "tlmThread",
+    4096,
+    NULL,
+    2,
     NULL
   );
 

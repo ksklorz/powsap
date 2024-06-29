@@ -59,6 +59,7 @@ private:
 
     void setWindowContinous();
     void setWindow();
+    void setWindowAuto();
 
     public:
         cPanelThread(uint32_t dT) : cThread(dT), _potentiometer(potPIN), 

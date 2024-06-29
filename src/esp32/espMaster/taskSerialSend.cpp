@@ -15,7 +15,7 @@ void serialSendThread(void *pvParameters)
         if(xQueueReceive(outSerialDataQueue, &packet, portMAX_DELAY))
         {
             serial.sendPacket((uint8_t*)&packet, sizeof(packet));
-            Serial.println("Sending packet");
+            // Serial.println("Sending packet");
         }
 
         vTaskDelay(10 / portTICK_PERIOD_MS);

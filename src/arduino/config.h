@@ -4,9 +4,9 @@
 const uint8_t tempPIN = 8;
 const uint8_t relayPIN = 7;
 
-const uint8_t btnLeftPIN = 13;
-const uint8_t btnMidPIN = 12;
-const uint8_t btnRightPIN = 11;
+const uint8_t btnLeftPIN = 5;
+const uint8_t btnMidPIN = 6;
+const uint8_t btnRightPIN = 7;
 const uint8_t potPIN = A2;
 
 
@@ -27,6 +27,6 @@ const unsigned long HEATER_DELAY = 10u;
 
 //////////////////////////////////////////////////
 const float setTempMin = 15.0f;
-const float setTempMax = 35.0f;
+const float setTempMax = 50.0f;
 
  

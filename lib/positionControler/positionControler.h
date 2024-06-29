@@ -20,7 +20,7 @@ public:
 
     cPositionControler(float Ts, int pwm, int motA, int motB, int encA, int encB) :
         cFeedbackMotor(Ts, pwm, motA, motB, encA, encB),
-        controler(Ts, -7.0, 7.0, 3.0, 0.0, 0.0), 
+        controler(Ts, -7.0, 7.0, 2.0, 0.0, 0.0), 
         set_position(0.0), mode(eModePosition)
     {};
 

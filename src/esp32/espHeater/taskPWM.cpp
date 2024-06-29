@@ -10,6 +10,7 @@ void taskPWM(void *pvParameters)
     
     TickType_t xLastWakeTime;
     xLastWakeTime = xTaskGetTickCount();
+    relay.setWidth(0.0f);
 
     while(true)
     {

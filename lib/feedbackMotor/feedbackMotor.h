@@ -14,7 +14,7 @@ class cFeedbackMotor : public cMotor, public cEncoder
 
         cFeedbackMotor(float Ts, int pwm, int motA, int motB, int encA, int encB) :
             cMotor(pwm, motA, motB), cEncoder(encA, encB),
-            controler(Ts, -1.0, 1.0, 0.04, .1, 0.0), set_speed(0.0)
+            controler(Ts, -1.0, 1.0, 0.03, .1, 0.0), set_speed(0.0)
         {};
 
         void update();

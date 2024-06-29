@@ -51,16 +51,16 @@ void espNowThread(void *pvParameters)
             memcpy(mac.mac, getMac(packet.device),6);
             esp_err_t result = esp_now_send(mac.mac, (uint8_t*)&packet, sizeof(sPacket));
             
-            // for(int i = 0; i < 6; i++)
-            // {
-            //     Serial.print(mac.mac[i], HEX);
-            //     Serial.print(" ");
-            // }
-
-            // Serial.println(packet.data);
-            // // Serial.println(packet.device);
-            // Serial.println(result, HEX);
-            // Serial.println();
+            for(int i = 0; i < 6; i++)
+            {
+                Serial.print(mac.mac[i], HEX);
+                Serial.print(" ");
+            }
+            Serial.print(" : ");
+            Serial.println(packet.data);
+            // Serial.println(packet.device);
+            Serial.println(result, HEX);
+            Serial.println();
             
         }
         // vTaskDelay(10/portTICK_PERIOD_MS);

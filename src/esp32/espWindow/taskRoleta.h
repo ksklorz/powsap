@@ -3,6 +3,7 @@
 
 
 extern QueueHandle_t setLightQueue;
+extern QueueHandle_t roletaSensorQueue;
 
 void roletaThread(void *pvParameters);
 

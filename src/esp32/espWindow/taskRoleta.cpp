@@ -17,6 +17,7 @@ void roletaThread(void *pvParameters)
     pinMode(PIN_CALIB, INPUT_PULLUP);
 
     float setPoint = 0.0f;
+    bool autoMode = false;
 
     roleta.setSpeed(5.0f);
     while(digitalRead(PIN_CALIB))
@@ -52,17 +53,29 @@ void roletaThread(void *pvParameters)
             if(eSensor::eSensorWindow == packet.sensor)
             {
                 setPoint = packet.data;
+                
+                if (setPoint < 0.0f)
+                    autoMode = true;
+                else
+                    autoMode = false;
+                    //nie mam sily robic tego porzadnie
                 // Serial.printf("Received packet\t%f\n",setPoint);
                 roleta.setPerc(setPoint);
             }
             Serial.println(roleta.getPos());
         }
         
-        if(xQueuePeek(lightSensorQueue, &setPoint, 0) == pdTRUE)
-            roleta.setPerc(setPoint);
+        if(autoMode)
+            if(xQueuePeek(lightSensorQueue, &setPoint, 0) == pdTRUE)
+                roleta.setPerc(setPoint);
+            
+        
 
 
         roleta.update();
+        float pos = roleta.getPerc();
+        xQueueOverwrite(roletaSensorQueue, &pos);
+
         // Serial.printf("%d;%.3f;%.3f;%.1f\n",millis(),roleta.getPos(), setPoint);
         vTaskDelayUntil(&xLastWakeTime, deltaTime / portTICK_PERIOD_MS);
     }

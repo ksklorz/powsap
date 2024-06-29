@@ -9,7 +9,7 @@ void cPanelThread::setup()
    _btnMid.setup();
    _btnRight.setup();
 
-    _display.printTest(21);
+    // _display.printTest(21);
     setupState();
 }
 
@@ -58,14 +58,14 @@ void cPanelThread::setupState()
 
         case eSetWindow:
             _btnLeft.attachFunction(&cPanelThread::goToStateShow);
-            _btnMid.attachFunction(nullptr);
+            _btnMid.attachFunction(&cPanelThread::setWindowAuto);
             _btnRight.attachFunction(&cPanelThread::setWindow);
             break;
     }
 }
 
 void cPanelThread::loopState()
-{
+{       
     float disp = 0.0f;
     switch (_state)
     {
@@ -89,10 +89,10 @@ void cPanelThread::loopState()
 
         case eSetWindow:
             disp = _potentiometer.readScaled(0.0f, 1.0f);
-            if(fabs(_tempData.window - disp)>0.01f) 
-                setWindowContinous();
+            // if(fabs(_tempData.window - disp)>0.01f) 
+            //     setWindowContinous();
             _tempData.window = disp;
-            _display.printSetData(disp*100.0f, 0, 'W');
+            _display.printSetData(disp*100.0f, 0, '%');
             break;
     }
 }
@@ -105,7 +105,6 @@ void cPanelThread::goToState(eMachineState state)
 
 void cPanelThread::setLightContinous()
 {
-    _dataOut.light = _tempData.light;
     sPacket packet;
 
     packet.sensor = eSensorLight;
@@ -119,6 +118,7 @@ void cPanelThread::setLightContinous()
 void cPanelThread::setLight()
 {
     setLightContinous();
+    _dataOut.light = _tempData.light;
     goToStateShow();
 }
 
@@ -126,16 +126,18 @@ void cPanelThread::setTemp()
 {
     _dataOut.temp = _tempData.temp;
     sPacket packet;
+
+    packet.sensor = eSensorTemp;
+    packet.device = eDeviceTemp;
     packet.data = _tempData.temp;
     packet.time = millis();
-    // _serial.sendPacket(packet);
+    serial.sendSerial(packet);
     
     goToStateShow();
 }
 
 void cPanelThread::setWindowContinous()
 {
-    _dataOut.window = _tempData.window;
     sPacket packet;
 
     packet.sensor = eSensorWindow;
@@ -144,12 +146,20 @@ void cPanelThread::setWindowContinous()
     packet.time = millis();
 
     serial.sendSerial(packet);
-    Serial.println("setWindowContinous");
 }
 
 void cPanelThread::setWindow()
 {
     setWindowContinous();
+    _dataOut.window = _tempData.window;
+    goToStateShow();
+}
+
+void cPanelThread::setWindowAuto()
+{
+    _tempData.window = -1.0f;
+    setWindowContinous();
+    _dataOut.window = _tempData.window;
     goToStateShow();
 }
 

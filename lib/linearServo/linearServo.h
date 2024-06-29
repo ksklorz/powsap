@@ -15,6 +15,7 @@ public:
     float getPos() {return cPositionControler::getAngle()/gear_ratio;};
     void setPos(float set) {cPositionControler::setAngle(set*gear_ratio);};
     void setPerc(float perc) {setPos(perc*max_position);};
+    float getPerc() {return getPos()/max_position;};
     void setSpeed(float speed) {cPositionControler::setSpeed(speed*gear_ratio);};
     void resetPos() {cEncoder::reset();};
     void resetPos(float position);

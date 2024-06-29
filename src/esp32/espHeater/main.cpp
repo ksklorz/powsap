@@ -6,7 +6,7 @@
 #include "taskPWM.h"
 #include "taskTelemetry.h"
 
-#include "taskTest.h"
+#include "taskCheckMAC.h"
 QueueHandle_t testQueue;
 
 QueueHandle_t inDataQueue;
@@ -15,6 +15,7 @@ QueueHandle_t outDataQueue;
 QueueHandle_t setPWMQueue;
 QueueHandle_t getTempQueue;
 QueueHandle_t tlmQueue;
+QueueHandle_t setTempQueue;
 
 
 void setup()
@@ -27,7 +28,8 @@ void setup()
   setPWMQueue = xQueueCreate(1, sizeof(float));
   getTempQueue = xQueueCreate(1, sizeof(float));
   
-  testQueue = inDataQueue;
+  
+  setTempQueue = inDataQueue;
   tlmQueue = outDataQueue;
 
   xTaskCreate(
@@ -73,7 +75,7 @@ void setup()
   );
 
   // xTaskCreate(
-  //   testThread,
+  //   checkMacAddressTask,
   //   "testThread",
   //   4096,
   //   NULL,

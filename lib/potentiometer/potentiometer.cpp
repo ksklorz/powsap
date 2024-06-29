@@ -10,7 +10,7 @@ float cPotentiometer::readNorm()
 {
     uint16_t value =  analogRead(_pin); 
     float x = ((float)value - (float)_minValue)/(float)(_maxValue-_minValue);
-    return x;
+    return 1.0f-x;
 }
 
 float cPotentiometer::readScaled(float min, float max)

@@ -2,7 +2,7 @@
 #include <arduino.h>
 
 const uint8_t PIN_RELAY = 8;
-const uint8_t PIN_FAN = 9;
+const uint8_t PIN_FAN = 6;
 const uint8_t PIN_TERMOMETER = 10;
 
 
